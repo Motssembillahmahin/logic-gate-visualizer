@@ -10,10 +10,12 @@ You check this file to know what needs attention before firing the next loop.
 
 ## Current status
 
-**Overall:** v1 BUILD COMPLETE — all polish/tests/README done; only the GitHub Pages deploy remains (needs a human)
+**Overall:** v1 SHIPPED — built, tested, committed, pushed, and LIVE on GitHub Pages.
 **Last updated:** 2026-06-19
-**Last agent:** Agent 8 — Polish + Deploy (polish complete; deploy blocked on human)
-**Blocking on human:** Yes — deploy needs a git repo + GitHub push auth (see below)
+**Last agent:** Agent 8 — Polish + Deploy (complete)
+**Blocking on human:** No
+**Live URL:** https://motssembillahmahin.github.io/logic-gate-visualizer/
+**Repo:** https://github.com/Motssembillahmahin/logic-gate-visualizer
 
 ---
 
@@ -26,28 +28,26 @@ You check this file to know what needs attention before firing the next loop.
 - [x] Run Agent 1 to initialize the project
       Done — `make build` and `make lint` both pass
 
-**Deploy to GitHub Pages needs a human.** The project directory is not a git
-repository and there is no configured remote or push auth, so `make deploy`
-cannot run autonomously. To publish:
+**Nothing.** Deploy is done. v1 is live at
+https://motssembillahmahin.github.io/logic-gate-visualizer/
 
-- [ ] Create the GitHub repo `logic-gate-visualizer` (owner asmmahin) if it does
-      not exist. The Vite `base` is already `/logic-gate-visualizer/` to match.
-- [ ] From this directory: `git init`, commit, add the remote
-      (`git remote add origin git@github.com:asmmahin/logic-gate-visualizer.git`),
-      and push `main`.
-- [ ] Authenticate for push (SSH key or `gh auth login`).
-- [ ] Run `make deploy` (builds and pushes `dist/` to the `gh-pages` branch).
-- [ ] In the repo settings, set GitHub Pages to serve from the `gh-pages` branch.
+Done in the deploy session: git initialized; 10 logical commits (scaffold →
+logic → components → context → pages → app wiring → docs), each co-authored by
+Claude; public repo created under Motssembillahmahin (the token owner — note this
+differs from the `asmmahin` handle referenced in CLAUDE.md; repo NAME matches so
+the Vite base `/logic-gate-visualizer/` is correct); pushed main; `make deploy`
+published `dist/` to gh-pages; Pages serving and verified live (200, correct
+title, assets resolve under the base path).
 
-Everything else is done: 91 tests + lint + production build all green, README
-written, responsive pass complete. The app runs locally now via `make dev`.
+Optional follow-ups (not blocking): if the canonical owner should be `asmmahin`,
+transfer/fork the repo there; revisit the 500ms ALU auto speed after watching it
+live; consider a custom share image/OG tags for the "share the link" goal.
 
 ---
 
 ## In progress
 
-_Agent 8 polish work complete. Only the GitHub Pages deploy remains — blocked on
-a human (git repo + push auth). See "What needs a human right now" above._
+_Nothing. v1 is shipped and live._
 
 ---
 
@@ -62,7 +62,7 @@ a human (git repo + push auth). See "What needs a human right now" above._
 | 5     | Gates + Adder   | complete    | live signals, derived outputs  |
 | 6     | ALU             | complete    | step + auto, carry animation   |
 | 7     | CPU + Result    | complete    | inline ALU + entry-point ending |
-| 8     | Polish + Deploy | partial     | polish/README/tests done; deploy needs human |
+| 8     | Polish + Deploy | complete    | shipped: 10 commits, pushed, live on Pages |
 
 ---
 
@@ -160,6 +160,27 @@ Pipeline changes:
 - Agent 2 → complete. Agent 3 (Shared Components) is now unblocked.
 New blockers for human: None.
 New open questions: None.
+
+### Session 9 — 2026-06-19 (deploy)
+Agent: Agent 8 follow-up — git history + publish
+Completed:
+- Authenticated gh with the provided token (owner Motssembillahmahin); wired git
+  to gh's credential helper so no token is stored in the repo.
+- git init; split the codebase into 10 logical, dependency-ordered commits
+  (scaffold → logic → components → context → entry/numbers → gates/adder → ALU →
+  cpu/result → app wiring → docs), each with a Claude Co-Authored-By trailer.
+  App wiring committed last so HEAD builds.
+- Excluded .claude/ (local harness state, incl. a runtime .lock) via .gitignore.
+- Created public repo Motssembillahmahin/logic-gate-visualizer; pushed main.
+- make deploy → published dist/ to gh-pages. Pages was auto-enabled.
+- Verified live: HTTP 200, correct <title>, assets resolve under
+  /logic-gate-visualizer/. URL above.
+Notes:
+- Token owner is Motssembillahmahin, not the asmmahin handle in CLAUDE.md. Repo
+  NAME matches so the Vite base is correct; owner can be changed later if needed.
+- This deploy session updated docs (state.md) AFTER the 10 code/doc commits, so
+  it is its own commit.
+New blockers for human: None. v1 is shipped.
 
 ### Session 8 — 2026-06-19
 Agent: Agent 8 — Polish + Deploy
